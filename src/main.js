@@ -8,16 +8,12 @@ let grabElements = () => {
   let amt = parseFloat($('#mine').val()).toFixed(2);
   let amt2 = parseFloat($('#want').val()).toFixed(2);
   let firstInput = $('#dropDown1').val();
-  console.log('firstInput', firstInput);
   let secondInput = $('#dropDown2').val();
-  console.log('secondInput', secondInput);
   return [firstInput, secondInput, amt, amt2];
 };
 
 let displayElements = (firstInput, secondInput, amt, res, id) => {
   $(`#${id}`).prop("value", `${res.conversion_result}`);
-  console.log('displayElement ID', id);
-  console.log('dE res.conRes', res.conversion_result);
   $('.conversion').html(`
     <p>${amt} ${firstInput} equals</p>
     <h2>${secondInput} ${res.conversion_result}</h2>
@@ -50,13 +46,11 @@ $(document).ready(() => {
     `);
     } else {
       let elArr = grabElements();
-      console.log('mine', elArr);
       Currency.convert(elArr[0], elArr[1], elArr[2])
         .then(res => {
           if(res instanceof Error) {
             throw Error('error to get a correct API response');
           }
-          console.log('res', res);
           displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
         })
         .catch(err => displayErr(err.message));
@@ -73,14 +67,11 @@ $(document).ready(() => {
     `);
     } else {
       let elArr = grabElements();
-      console.log('want elArr', elArr);
       Currency.convert(elArr[1], elArr[0], elArr[3])
         .then(res => {
           if(res instanceof Error) {
             throw Error('error to get to res');
           }
-          console.log('res', res);
-          console.log('elArr', elArr);
           displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
         })
         .catch(err => displayErr(err.message));
@@ -90,14 +81,11 @@ $(document).ready(() => {
 
   $('#dropDown1').on('change', () => {
     let elArr = grabElements();
-    console.log('want elArr', elArr);
     Currency.convert(elArr[0], elArr[1], elArr[2])
       .then(res => {
         if(res instanceof Error) {
           throw Error('error to get to res');
         }
-        console.log('res', res);
-        console.log('elArr', elArr);
         displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
         $('#want').prop("value", `${res.conversion_result}`);
       })
@@ -106,38 +94,13 @@ $(document).ready(() => {
   });
   $('#dropDown2').on('change', () => {
     let elArr = grabElements();
-    console.log('want elArr', elArr);
     Currency.convert(elArr[1], elArr[0], elArr[3])
       .then(res => {
         if(res instanceof Error) {
           throw Error('error to get to res');
         }
-        console.log('res', res);
-        console.log('elArr', elArr);
         displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
       })
       .catch(err => displayErr(err.message));
   });
 });
-
-
-
-// TO CHANGE THE PLACEHOLDER VALUE
-// $(document).ready(function(){ 
-//   $('form').find("input[type=textarea], input[type=password], textarea").each(function(ev)
-//   {
-//     if(!$(this).val()) { 
-//       $(this).prop("placeholder", "Type your answer here");
-//   }
-//   });
-// });
-/* NOTES FOR DEV */
-// https://v6.exchangerate-api.com/v6/bb0b3db76944e54e64a43d98/pair/EUR/GBP
-
-// PHP	Philippine Peso	Philippines
-// THB	Thai Baht	Thailand
-// TWD	New Taiwan Dollar	Taiwan
-// VND	Vietnamese Đồng	Vietnam
-// SGD	Singapore Dollar	Singapore
-// JPY	Japanese Yen	Japan
-// KRW	South Korean Won	South Korea
