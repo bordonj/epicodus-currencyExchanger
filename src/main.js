@@ -1,14 +1,25 @@
-// import $ from 'jquery';
+import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/curr-service';
-// import { Project } from 'js/project';
-Currency.convert('USD', 'KRW')
-  .then(res => {
-    console.log('res', res);
-    console.log('res', res.conversion_rate);
+
+$(document).ready(() => {
+  $('#currInput').on('submit', (e) => {
+    e.preventDefault();
+    let firstInput = $('#firstCurr').val();
+    console.log('firstInput', firstInput);
+    let secondInput = $('#secondCurr').val();
+    console.log('secondInput', secondInput);
+    Currency.convert(firstInput, secondInput)
+      .then(res => {
+        $('.output').html(res.conversion_rate);
+        console.log('res', res);
+        console.log('res', res.conversion_rate);
+      }); 
   });
+});
+
 
 
 /* NOTES FOR DEV */
