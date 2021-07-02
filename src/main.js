@@ -2,9 +2,13 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import Currency from './js/curr-service';
 // import { Project } from 'js/project';
-
-console.log('key', process.env.API_KEY);
+Currency.convert('USD', 'KRW')
+  .then(res => {
+    console.log('res', res);
+    console.log('res', res.conversion_rate);
+  });
 
 
 /* NOTES FOR DEV */
