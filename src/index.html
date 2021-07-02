@@ -1,8 +1,40 @@
 <html lang="en-US">
 <head>
+  <title>Currency Converter</title>
 </head>
 <body>
-  <div>Hello world!</div>
-  <img src="assets/images/atock-puppy-photo.jpeg" alt="such a pup!">
+  <div class='container'>
+    <div class='jumbotron'>
+      <h1>Currency Converter</h1>
+    </div>
+    <div class='content'>
+      <form id='currInput'>
+      <div class='row'>
+
+        <div class='col-md-6'>
+          <label for="firstCurr">Currency I have:</label>
+          <select class= 'form-control' id="firstCurr">
+            <option value='usd'>USD</option>
+            <option value='krw'>KRW</option>
+            <option value='php'>PHP</option>
+            <option value='sgd'>SGD</option>
+            <option value='jpy'>JPY</option>
+          </select>
+        </div>
+        <div class='col-md-6'>
+          <label for="secondCurr">Currency I want:</label>
+          <select class='form-control' id="secondCurr">
+            <option value='usd'>USD</option>
+            <option value='krw'>KRW</option>
+            <option value='php'>PHP</option>
+            <option value='sgd'>SGD</option>
+            <option value='jpy'>JPY</option>
+          </select>
+        </div>
+        <button type='submit' class='btn btn-primary'>Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
