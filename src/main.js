@@ -7,6 +7,24 @@ import Currency from './js/curr-service';
 $(document).ready(() => {
   let amt = parseFloat($('#inputAmt').val());
   console.log('amt input', amt);
+  $('#currInput').on('submit', (e) => {
+    e.preventDefault();
+    amt = parseFloat($('#inputAmt').val());
+    console.log('amt input', amt);
+    let firstInput = $('#firstCurr').val();
+    console.log('firstInput', firstInput);
+    let secondInput = $('#secondCurr').val();
+    console.log('secondInput', secondInput);
+    Currency.convert(firstInput, secondInput, amt)
+      .then(res => {
+        $('.output').html(`
+          <p>converstion rate: ${res.conversion_rate}</p>
+          <p>converstion result: ${res.conversion_result}</p>
+        `);
+        console.log('res', res);
+        console.log('res', res.conversion_rate);
+      }); 
+  });
   $('select#firstCurr').on('change', () => {
     let firstInput = $('#firstCurr').val();
     console.log('firstInput', firstInput);
@@ -14,28 +32,15 @@ $(document).ready(() => {
     console.log('secondInput', secondInput);
     Currency.convert(firstInput, secondInput, amt)
       .then(res => {
-        $('.output').html(res.conversion_rate);
+        $('.output').html(`
+          <p>converstion rate: ${res.conversion_rate}</p>
+          <p>converstion result: ${res.conversion_result}</p>
+        `);
         console.log('res', res);
         console.log('res', res.conversion_rate);
       }); 
   });
   $('select#secondCurr').on('change', () => {
-    let firstInput = $('#firstCurr').val();
-    console.log('firstInput', firstInput);
-    let secondInput = $('#secondCurr').val();
-    console.log('secondInput', secondInput);
-    Currency.convert(firstInput, secondInput, amt)
-      .then(res => {
-        $('.output').html(res.conversion_rate);
-        console.log('res', res);
-        console.log('res', res.conversion_rate);
-      }); 
-  });
-
-  $('#currInput').on('submit', (e) => {
-    e.preventDefault();
-    let amt = parseFloat($('#inputAmt').val());
-    console.log('amt input', amt);
     let firstInput = $('#firstCurr').val();
     console.log('firstInput', firstInput);
     let secondInput = $('#secondCurr').val();
