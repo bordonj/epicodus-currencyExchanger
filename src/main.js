@@ -15,7 +15,9 @@ let grabElements = () => {
 };
 
 let displayElements = (firstInput, secondInput, amt, res, id) => {
-  $(`#${id}`).attr("value", `${res.conversion_result}`);
+  $(`#${id}`).prop("value", `${res.conversion_result}`);
+  console.log('displayElement ID', id);
+  console.log('dE res.conRes', res.conversion_result);
   $('.conversion').html(`
     <p>${amt} ${firstInput} equals</p>
     <h2>${secondInput} ${res.conversion_result}</h2>
@@ -30,26 +32,24 @@ let displayErr = (err) => {
 $(document).ready(() => {
   $('#mine').on('change', () =>{
     if ($('#mine').val() === '0') {
-      $('#want').attr("value", `0`);
+      $('#want').prop("value", `0`);
     } else {
       let elArr = grabElements();
       console.log('mine', elArr);
       Currency.convert(elArr[0], elArr[1], elArr[2])
         .then(res => {
           if(res instanceof Error) {
-            throw Error('error to get to res');
+            throw Error('error to get a correct API response');
           }
           console.log('res', res);
           displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
-          $('#want').attr("value", `${res.conversion_result}`);
-
         })
         .catch(err => displayErr(err.message));
     }
   });
   $('#want').on('change', () => {
     if ($('#want').val() === '0') {
-      $('#mine').attr("value", `0`);
+      $('#mine').prop("value", `0`);
     } else {
       let elArr = grabElements();
       console.log('want elArr', elArr);
@@ -61,12 +61,33 @@ $(document).ready(() => {
           console.log('res', res);
           console.log('elArr', elArr);
           displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
-          $('#mine').attr("value", `${res.conversion_result}`);
         })
         .catch(err => displayErr(err.message));
     }
   });
 
+
+
+  ///ignore
+  // $('#dropDown1').on('change', () => {
+  //   if ($('#want').val() === '0') {
+  //     $('#mine').prop("value", `0`);
+  //   } else {
+  //     let elArr = grabElements();
+  //     console.log('want elArr', elArr);
+  //     Currency.convert(elArr[1], elArr[0], elArr[3])
+  //       .then(res => {
+  //         if(res instanceof Error) {
+  //           throw Error('error to get to res');
+  //         }
+  //         console.log('res', res);
+  //         console.log('elArr', elArr);
+  //         displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
+  //         $('#mine').prop("value", `${res.conversion_result}`);
+  //       })
+  //       .catch(err => displayErr(err.message));
+  //   }
+  // });
 
 
 
@@ -137,7 +158,7 @@ $(document).ready(() => {
 //   $('form').find("input[type=textarea], input[type=password], textarea").each(function(ev)
 //   {
 //     if(!$(this).val()) { 
-//       $(this).attr("placeholder", "Type your answer here");
+//       $(this).prop("placeholder", "Type your answer here");
 //   }
 //   });
 // });
