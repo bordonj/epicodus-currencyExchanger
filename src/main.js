@@ -67,27 +67,36 @@ $(document).ready(() => {
   });
 
 
-
-  ///ignore
-  // $('#dropDown1').on('change', () => {
-  //   if ($('#want').val() === '0') {
-  //     $('#mine').prop("value", `0`);
-  //   } else {
-  //     let elArr = grabElements();
-  //     console.log('want elArr', elArr);
-  //     Currency.convert(elArr[1], elArr[0], elArr[3])
-  //       .then(res => {
-  //         if(res instanceof Error) {
-  //           throw Error('error to get to res');
-  //         }
-  //         console.log('res', res);
-  //         console.log('elArr', elArr);
-  //         displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
-  //         $('#mine').prop("value", `${res.conversion_result}`);
-  //       })
-  //       .catch(err => displayErr(err.message));
-  //   }
-  // });
+  $('#dropDown1').on('change', () => {
+    let elArr = grabElements();
+    console.log('want elArr', elArr);
+    Currency.convert(elArr[0], elArr[1], elArr[2])
+      .then(res => {
+        if(res instanceof Error) {
+          throw Error('error to get to res');
+        }
+        console.log('res', res);
+        console.log('elArr', elArr);
+        displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
+        $('#want').prop("value", `${res.conversion_result}`);
+      })
+      .catch(err => displayErr(err.message));
+  
+  });
+  $('#dropDown2').on('change', () => {
+    let elArr = grabElements();
+    console.log('want elArr', elArr);
+    Currency.convert(elArr[1], elArr[0], elArr[3])
+      .then(res => {
+        if(res instanceof Error) {
+          throw Error('error to get to res');
+        }
+        console.log('res', res);
+        console.log('elArr', elArr);
+        displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
+      })
+      .catch(err => displayErr(err.message));
+  });
 
 
 
