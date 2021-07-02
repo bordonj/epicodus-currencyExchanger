@@ -6,7 +6,7 @@ import Currency from './js/curr-service';
 
 let grabElements = () => {
   let amt = parseFloat($('#mine').val());
-  let amt2 = parseFloat($('#mine').val());
+  let amt2 = parseFloat($('#want').val());
   let firstInput = $('#dropDown1').val();
   console.log('firstInput', firstInput);
   let secondInput = $('#dropDown2').val();
@@ -14,13 +14,17 @@ let grabElements = () => {
   return [firstInput, secondInput, amt, amt2];
 };
 
-let displayElements = (firstInput, secondInput, amt, res) => {
-  $('#want').attr("value", `${res.conversion_result}`);
+let displayElements = (firstInput, secondInput, amt, res, id) => {
+  $(`#${id}`).attr("value", `${res.conversion_result}`);
   $('.conversion').html(`
     <p>${amt} ${firstInput} equals</p>
     <h2>${secondInput} ${res.conversion_result}</h2>
-    <p>converstion rate: ${res.conversion_rate}</p>
+    <p>conversion rate: ${res.conversion_rate}</p>
   `);
+};
+
+let displayErr = (err) => {
+  $('.conversion').text(`${err}`);
 };
 
 $(document).ready(() => {
@@ -29,11 +33,37 @@ $(document).ready(() => {
       $('#want').attr("value", `0`);
     } else {
       let elArr = grabElements();
+      console.log('mine', elArr);
       Currency.convert(elArr[0], elArr[1], elArr[2])
         .then(res => {
+          if(res instanceof Error) {
+            throw Error('error to get to res');
+          }
           console.log('res', res);
-          displayElements(elArr[0], elArr[1], elArr[2], res);
-        });
+          displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
+          $('#want').attr("value", `${res.conversion_result}`);
+
+        })
+        .catch(err => displayErr(err.message));
+    }
+  });
+  $('#want').on('change', () => {
+    if ($('#want').val() === '0') {
+      $('#mine').attr("value", `0`);
+    } else {
+      let elArr = grabElements();
+      console.log('want elArr', elArr);
+      Currency.convert(elArr[1], elArr[0], elArr[3])
+        .then(res => {
+          if(res instanceof Error) {
+            throw Error('error to get to res');
+          }
+          console.log('res', res);
+          console.log('elArr', elArr);
+          displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
+          $('#mine').attr("value", `${res.conversion_result}`);
+        })
+        .catch(err => displayErr(err.message));
     }
   });
 
