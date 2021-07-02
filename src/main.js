@@ -30,6 +30,16 @@ let displayErr = (err) => {
 };
 
 $(document).ready(() => {
+  let onFirstLoad = grabElements();
+  Currency.convert(onFirstLoad[0], onFirstLoad[1], onFirstLoad[2])
+    .then(res => {
+      if(res instanceof Error)  {
+        throw Error('error to get correct API response');
+      }
+      displayElements(onFirstLoad[0], onFirstLoad[1], onFirstLoad[2], res, 'want');
+    })
+    .catch(err => displayErr(err.message));
+
   $('#mine').on('change', () =>{
     if ($('#mine').val() === '0') {
       $('#want').prop("value", `0`);
@@ -96,67 +106,6 @@ $(document).ready(() => {
         displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
       })
       .catch(err => displayErr(err.message));
-  });
-
-
-
-
-
-
-
-
-
-
-  //below used for checking logic
-  let amt = parseFloat($('#inputAmt').val());
-  console.log('amt input', amt);
-  $('#currInput').on('submit', (e) => {
-    e.preventDefault();
-    amt = parseFloat($('#inputAmt').val());
-    console.log('amt input', amt);
-    let firstInput = $('#firstCurr').val();
-    console.log('firstInput', firstInput);
-    let secondInput = $('#secondCurr').val();
-    console.log('secondInput', secondInput);
-    Currency.convert(firstInput, secondInput, amt)
-      .then(res => {
-        $('.output').html(`
-          <p>converstion rate: ${res.conversion_rate}</p>
-          <p>converstion result: ${res.conversion_result}</p>
-        `);
-        console.log('res', res);
-        console.log('res', res.conversion_rate);
-      }); 
-  });
-  $('select#firstCurr').on('change', () => {
-    let firstInput = $('#firstCurr').val();
-    console.log('firstInput', firstInput);
-    let secondInput = $('#secondCurr').val();
-    console.log('secondInput', secondInput);
-    Currency.convert(firstInput, secondInput, amt)
-      .then(res => {
-        $('.output').html(`
-          <p>converstion rate: ${res.conversion_rate}</p>
-          <p>converstion result: ${res.conversion_result}</p>
-        `);
-        console.log('res', res);
-        console.log('res', res.conversion_rate);
-      }); 
-  });
-  $('select#secondCurr').on('change', () => {
-    let firstInput = $('#firstCurr').val();
-    console.log('firstInput', firstInput);
-    let secondInput = $('#secondCurr').val();
-    console.log('secondInput', secondInput);
-    Currency.convert(firstInput, secondInput, amt)
-      .then(res => {
-        $('.output').html(`
-          <p>converstion rate: ${res.conversion_rate}</p>
-          <p>converstion result: ${res.conversion_result}</p>
-        `);
-        console.log('res', res);
-        console.log('res', res.conversion_rate);
-      }); 
   });
 });
 
