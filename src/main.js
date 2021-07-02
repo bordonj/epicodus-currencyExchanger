@@ -14,6 +14,15 @@ let grabElements = () => {
   return [firstInput, secondInput, amt, amt2];
 };
 
+let displayElements = (firstInput, secondInput, amt, res) => {
+  $('#want').attr("value", `${res.conversion_result}`);
+  $('.conversion').html(`
+    <p>${amt} ${firstInput} equals</p>
+    <h2>${secondInput} ${res.conversion_result}</h2>
+    <p>converstion rate: ${res.conversion_rate}</p>
+  `);
+};
+
 $(document).ready(() => {
   $('#mine').on('change', () =>{
     if ($('#mine').val() === '0') {
@@ -23,12 +32,7 @@ $(document).ready(() => {
       Currency.convert(elArr[0], elArr[1], elArr[2])
         .then(res => {
           console.log('res', res);
-          $('#want').attr("value", `${res.conversion_result}`);
-          $('.conversion').html(`
-            <p>${elArr[2]} ${elArr[0]} equals</p>
-            <h2>${elArr[1]} ${res.conversion_result}</h2>
-            <p>converstion rate: ${res.conversion_rate}</p>
-          `);
+          displayElements(elArr[0], elArr[1], elArr[2], res);
         });
     }
   });
