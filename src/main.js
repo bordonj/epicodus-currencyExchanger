@@ -84,7 +84,10 @@ $(document).ready(() => {
     Currency.convert(elArr[0], elArr[1], elArr[2])
       .then(res => {
         if(res instanceof Error) {
-          throw Error('error to get to res');
+          if (res.message.includes('400')) {
+            alert('RBY is only a language here');
+          }
+          throw Error('this currency is fake!');
         }
         displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
         $('#want').prop("value", `${res.conversion_result}`);
@@ -97,7 +100,10 @@ $(document).ready(() => {
     Currency.convert(elArr[1], elArr[0], elArr[3])
       .then(res => {
         if(res instanceof Error) {
-          throw Error('error to get to res');
+          if (res.message.includes('400')) {
+            alert('RBY is only a language here');
+          }
+          throw Error('this currency is fake!');
         }
         displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
       })
