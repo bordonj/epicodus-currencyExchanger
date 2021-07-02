@@ -5,8 +5,8 @@ import './css/styles.css';
 import Currency from './js/curr-service';
 
 let grabElements = () => {
-  let amt = parseFloat($('#mine').val());
-  let amt2 = parseFloat($('#want').val());
+  let amt = parseFloat($('#mine').val()).toFixed(2);
+  let amt2 = parseFloat($('#want').val()).toFixed(2);
   let firstInput = $('#dropDown1').val();
   console.log('firstInput', firstInput);
   let secondInput = $('#dropDown2').val();
@@ -42,7 +42,12 @@ $(document).ready(() => {
 
   $('#mine').on('change', () =>{
     if ($('#mine').val() === '0') {
+      let elArr = grabElements();
       $('#want').prop("value", `0`);
+      $('.conversion').html(`
+      <p>0 ${elArr[0]} equals</p>
+      <h2>${elArr[1]} 0</h2>
+    `);
     } else {
       let elArr = grabElements();
       console.log('mine', elArr);
@@ -60,6 +65,12 @@ $(document).ready(() => {
   $('#want').on('change', () => {
     if ($('#want').val() === '0') {
       $('#mine').prop("value", `0`);
+      let elArr = grabElements();
+      $('#want').prop("value", `0`);
+      $('.conversion').html(`
+      <p>0 ${elArr[1]} equals</p>
+      <h2>${elArr[0]} 0</h2>
+    `);
     } else {
       let elArr = grabElements();
       console.log('want elArr', elArr);
