@@ -97,7 +97,7 @@ $(document).ready(() => {
   });
   $('#dropDown2').on('change', () => {
     let elArr = grabElements();
-    Currency.convert(elArr[1], elArr[0], elArr[3])
+    Currency.convert(elArr[0], elArr[1], elArr[2])
       .then(res => {
         if(res instanceof Error) {
           if (res.message.includes('400')) {
@@ -105,7 +105,7 @@ $(document).ready(() => {
           }
           throw Error('this currency is fake!');
         }
-        displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
+        displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
       })
       .catch(err => displayErr(err.message));
   });
