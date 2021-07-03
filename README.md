@@ -27,7 +27,7 @@ The _Currency Exchanger_ is an application used to display currency conversions.
 
 ## Setup/Installation Requirements
 * Clone this project into your preferred directory
-* In that directory, there should now be a directory labeled "repoName"
+* In that directory, there should now be a directory labeled "epicodus-currencyExchanger"
 * run `npm i` to install respective plugins/packages
 * retrieve API key
   - visit https://www.exchangerate-api.com/ 
