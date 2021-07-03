@@ -4,6 +4,37 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/curr-service';
 
+const addCommas = numStr => {
+  let counter = 0;
+  let wholeNumStr = '';
+
+  for (let i = numStr.length - 1; i >= 0; i--) {
+    counter++;
+    wholeNumStr = numStr[i] + wholeNumStr;
+    if (counter % 3 === 0 && i !== 0) {
+      wholeNumStr = ',' + wholeNumStr;
+    } 
+  }
+  return wholeNumStr;
+};
+
+const evalNum = (numStr) => {
+  if (numStr.includes('.')) {
+    let numSplit = numStr.split('.');
+    let numWhole = numSplit[0];
+    let numDecimal = numSplit[1];
+    let numFixDecimal = (numDecimal[0] === '0' && numDecimal[1] === '0') ?
+      numDecimal.slice(0, 4) :
+      numDecimal.slice(0, 2);
+    let numFixWhole = numWhole.length > 3 ?
+      addCommas(numWhole) :
+      numWhole;
+    return `${numFixWhole}.${numFixDecimal}`;
+  } else {
+    return numStr;
+  }
+};
+
 let grabElements = () => {
   let amt = parseFloat($('#mine').val()).toFixed(2);
   let amt2 = parseFloat($('#want').val()).toFixed(2);
@@ -13,11 +44,11 @@ let grabElements = () => {
 };
 
 let displayElements = (firstInput, secondInput, amt, res, id) => {
-  $(`#${id}`).prop("value", `${res.conversion_result.toFixed(2)}`);
+  $(`#${id}`).prop("value", `${evalNum(res.conversion_result.toString())}`);
   $('.conversion').html(`
     <p>${amt} ${firstInput} equals</p>
-    <h2>${secondInput} ${res.conversion_result.toFixed(2)}</h2>
-    <p>conversion rate: ${res.conversion_rate.toFixed(2)}</p>
+    <h2>${secondInput} ${evalNum(res.conversion_result.toString())}</h2>
+    <p>conversion rate: ${evalNum(res.conversion_rate.toString())}</p>
   `);
 };
 
@@ -90,7 +121,7 @@ $(document).ready(() => {
           throw Error('this currency is fake!');
         }
         displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
-        $('#want').prop("value", `${res.conversion_result.toFixed(2)}`);
+        $('#want').prop("value", `${evalNum(res.conversion_result.toString())}`);
       })
       .catch(err => displayErr(err.message));
   

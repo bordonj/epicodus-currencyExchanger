@@ -39,7 +39,7 @@ The _Currency Exchanger_ is an application used to display currency conversions 
 * _eslint_
 ## Known Bugs
 
-* _at the moment, developer is not smart enough to account for inputting commas, or outputting commas_
+* _None known at the moment_
 
 ## License
 
