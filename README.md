@@ -4,20 +4,6 @@
 
 #### By _**Jennifer Bordon**_
 
-## Technologies Used
-
-* _Git_
-* _HTML_
-* _CSS_ 
-* _Bootstrap_
-* _jQuery_
-* _JavaScript_
-* _npm_
-* _webpack_
-* _eslint_
-
-
-
 ## Description
 The _Currency Exchanger_ is an application used to display currency conversions (layout inspired by Google's search engine converter). 
 - A user can open the application and immediately see the default result of 1 United States Dollar (USD) converted to the amount in Singapore Dollars (SGD). 
@@ -40,10 +26,17 @@ The _Currency Exchanger_ is an application used to display currency conversions 
 * on the live server, you can enter either inputs, or use the dropdown menu to change currencies
 * there is one fake currency, (RBY) that should show that the currency doesn't exist if you choose it
 
-## Github Pages link
+## Technologies Used
 
-[Click here](https://github.com/bordonj/epicodus-currencyExchanger) for the Github Pages link. 
-
+* _Git_
+* _HTML_
+* _CSS_ 
+* _Bootstrap_
+* _jQuery_
+* _JavaScript_
+* _npm_
+* _webpack_
+* _eslint_
 ## Known Bugs
 
 * _at the moment, developer is not smart enough to account for inputting commas, or outputting commas_
