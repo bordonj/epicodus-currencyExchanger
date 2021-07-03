@@ -30,7 +30,7 @@ $(document).ready(() => {
   Currency.convert(onFirstLoad[0], onFirstLoad[1], onFirstLoad[2])
     .then(res => {
       if(res instanceof Error)  {
-        throw Error('error to get correct API response');
+        throw Error('error in requesting API response');
       }
       displayElements(onFirstLoad[0], onFirstLoad[1], onFirstLoad[2], res, 'want');
     })
@@ -49,7 +49,7 @@ $(document).ready(() => {
       Currency.convert(elArr[0], elArr[1], elArr[2])
         .then(res => {
           if(res instanceof Error) {
-            throw Error('error to get a correct API response');
+            throw Error('invalid input to get correct API response');
           }
           displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
         })
@@ -70,7 +70,7 @@ $(document).ready(() => {
       Currency.convert(elArr[1], elArr[0], elArr[3])
         .then(res => {
           if(res instanceof Error) {
-            throw Error('error to get to res');
+            throw Error('invalid input to get correct API response');
           }
           displayElements(elArr[1], elArr[0], elArr[3], res, 'mine');
         })
