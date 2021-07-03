@@ -19,6 +19,11 @@
 
 
 ## Description
+The _Currency Exchanger_ is an application used to display currency conversions. 
+- A user can open the application and immediately see the default result of 1 United States Dollar (USD) converted to the amount in Singapore Dollars (SGD). 
+- Upon changing any input or dropdown selection, once a user clicks out onto the window, the result will update. 
+  - The user can type in any amount in the respective inputs next to its dropdown selected currency, and upon 'clicking out', the result will be reflected on the dom with both the currency value and its currency name (e.g., USD, SGD, KRW). 
+  - A user can also choose a different dropdown choice for the currency to see updated conversion results. 
 
 ## Setup/Installation Requirements
 * Clone this project into your preferred directory
