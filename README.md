@@ -46,7 +46,7 @@ The _Currency Exchanger_ is an application used to display currency conversions.
 
 ## Known Bugs
 
-* _none known at the moment_
+* _at the moment, developer is not smart enough to account for inputting commas, or outputting commas_
 
 ## License
 
