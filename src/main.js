@@ -35,7 +35,7 @@ const evalNum = (numStr) => {
   }
 };
 
-let grabElements = () => {
+const grabElements = () => {
   let amt = parseFloat($('#mine').val()).toFixed(2);
   let amt2 = parseFloat($('#want').val()).toFixed(2);
   let firstInput = $('#dropDown1').val();
@@ -43,7 +43,7 @@ let grabElements = () => {
   return [firstInput, secondInput, amt, amt2];
 };
 
-let displayElements = (firstInput, secondInput, amt, res, id) => {
+const displayElements = (firstInput, secondInput, amt, res, id) => {
   $(`#${id}`).prop("value", `${evalNum(res.conversion_result.toString())}`);
   $('.conversion').html(`
     <p>${amt} ${firstInput} equals</p>
@@ -52,7 +52,7 @@ let displayElements = (firstInput, secondInput, amt, res, id) => {
   `);
 };
 
-let displayErr = (err) => {
+const displayErr = (err) => {
   $('.conversion').text(`${err}`);
 };
 
