@@ -32,6 +32,8 @@
   - paste the string with your key into your `.env` file
   - make sure you run `npm start` after you update this `.env` file so it rebuilds the files with this key
 * after the above, run `npm start` to see a live server of the app
+* on the live server, you can enter either inputs, or use the dropdown menu to change currencies
+* there is one fake currency, (RBY) that should show that the currency doesn't exist if you choose it
 
 ## Github Pages link
 
