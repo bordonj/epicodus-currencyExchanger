@@ -13,11 +13,11 @@ let grabElements = () => {
 };
 
 let displayElements = (firstInput, secondInput, amt, res, id) => {
-  $(`#${id}`).prop("value", `${res.conversion_result}`);
+  $(`#${id}`).prop("value", `${res.conversion_result.toFixed(2)}`);
   $('.conversion').html(`
     <p>${amt} ${firstInput} equals</p>
-    <h2>${secondInput} ${res.conversion_result}</h2>
-    <p>conversion rate: ${res.conversion_rate}</p>
+    <h2>${secondInput} ${res.conversion_result.toFixed(2)}</h2>
+    <p>conversion rate: ${res.conversion_rate.toFixed(2)}</p>
   `);
 };
 
@@ -90,7 +90,7 @@ $(document).ready(() => {
           throw Error('this currency is fake!');
         }
         displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
-        $('#want').prop("value", `${res.conversion_result}`);
+        $('#want').prop("value", `${res.conversion_result.toFixed(2)}`);
       })
       .catch(err => displayErr(err.message));
   
