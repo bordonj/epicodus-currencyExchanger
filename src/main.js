@@ -31,7 +31,10 @@ const evalNum = (numStr) => {
       numWhole;
     return `${numFixWhole}.${numFixDecimal}`;
   } else {
-    return numStr;
+    let numFixWhole = numStr.length > 3 ?
+    addCommas(numStr) :
+    numStr;
+    return numFixWhole;
   }
 };
 
