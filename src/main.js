@@ -39,8 +39,18 @@ const evalNum = (numStr) => {
 };
 
 const grabElements = () => {
-  let amt = parseFloat($('#mine').val()).toFixed(2);
-  let amt2 = parseFloat($('#want').val()).toFixed(2);
+  let amt;
+  if ($('#mine').val().includes(',')) {
+    amt = parseFloat($('#mine').val().split(',').join('')).toFixed(2);
+  } else {
+    amt = parseFloat($('#mine').val()).toFixed(2);
+  }
+  let amt2;
+  if ($('#want').val().includes(',')) {
+    amt2 = parseFloat($('#want').val().split(',').join('')).toFixed(2);
+  } else {
+    amt2 = parseFloat($('#want').val()).toFixed(2);
+  }
   let firstInput = $('#dropDown1').val();
   let secondInput = $('#dropDown2').val();
   return [firstInput, secondInput, amt, amt2];
@@ -49,7 +59,7 @@ const grabElements = () => {
 const displayElements = (firstInput, secondInput, amt, res, id) => {
   $(`#${id}`).prop("value", `${evalNum(res.conversion_result.toString())}`);
   $('.conversion').html(`
-    <p>${amt} ${firstInput} equals</p>
+    <p>${evalNum(amt)} ${firstInput} equals</p>
     <h2>${secondInput} ${evalNum(res.conversion_result.toString())}</h2>
     <p>conversion rate: ${evalNum(res.conversion_rate.toString())}</p>
   `);
