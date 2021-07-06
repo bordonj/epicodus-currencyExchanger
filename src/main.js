@@ -80,7 +80,7 @@ $(document).ready(() => {
     })
     .catch(err => displayErr(err.message));
 
-  $('#mine').on('change', () =>{
+  $('#mine').on('change', () => {
     if ($('#mine').val() === '0') {
       let elArr = grabElements();
       $('#want').prop("value", `0`);
@@ -100,6 +100,7 @@ $(document).ready(() => {
         .catch(err => displayErr(err.message));
     }
   });
+
   $('#want').on('change', () => {
     if ($('#want').val() === '0') {
       $('#mine').prop("value", `0`);
@@ -122,7 +123,6 @@ $(document).ready(() => {
     }
   });
 
-
   $('#dropDown1').on('change', () => {
     let elArr = grabElements();
     Currency.convert(elArr[0], elArr[1], elArr[2])
@@ -137,8 +137,8 @@ $(document).ready(() => {
         $('#want').prop("value", `${evalNum(res.conversion_result.toString())}`);
       })
       .catch(err => displayErr(err.message));
-  
   });
+  
   $('#dropDown2').on('change', () => {
     let elArr = grabElements();
     Currency.convert(elArr[0], elArr[1], elArr[2])
