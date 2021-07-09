@@ -118,10 +118,7 @@ $(document).ready(() => {
     Currency.convert(elArr[0], elArr[1], elArr[2])
       .then(res => {
         if(res instanceof Error) {
-          if (res.message.includes('400')) {
-            alert('RBY is only a language here');
-          }
-          throw Error('this currency is fake!');
+          throw Error('Opps! Something went wrong. Please try again later.!');
         }
         displayElements(elArr[0], elArr[1], elArr[2], res, 'want');
         $('#want').prop("value", `${evalNum(res.conversion_result.toString())}`);
